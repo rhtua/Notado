@@ -1,0 +1,35 @@
+﻿
+
+@model Notado.ViewModels.ProfessorViewModel
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Formação</th>
+            <th scope="col">Disciplina</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Professor in ViewBag.Professores)
+        {
+            <tr>
+                <th scope="row">@Professor.Id</th>
+                <td>@Professor.nome</td>
+                <td>@Professor.email</td>
+                <td>@Professor.telefone</td>
+                <td>@Professor.Formacao</td>
+                <td>@Professor.Disciplina</td>
+
+                <td><a href="/Professor/Editar/@Professor.Id" class="btn btn-primary">Editar</a></td>
+                <td><a href="/Professor/Excluir/@Professor.Id" class="btn btn-primary">Excluir</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

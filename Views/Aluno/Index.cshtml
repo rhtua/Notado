@@ -1,0 +1,39 @@
+﻿
+
+@model Notado.ViewModels.AlunoViewModel
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Turma</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Responsável 1</th>
+            <th scope="col">Vínculo</th>
+            <th scope="col">Telefones</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Aluno in ViewBag.Alunos)
+        {
+            <tr>
+                <th scope="row">@Aluno.Id</th>
+                <td>@Aluno.nome</td>
+                <td>@Aluno.email</td>
+                <td>@Aluno.TurmaId</td>
+                <td>@Aluno.telefone</td>
+                <td>@Aluno.nome_responsavel_1</td>
+                <td>@Aluno.vinculo</td>
+                <td>@Aluno.telefone_responsavel_1 / @Aluno.telefone2_responsavel_1</td>
+
+                <td><a href="/Aluno/Editar/@Aluno.Id" class="btn btn-primary">Editar</a></td>
+                <td><a href="/Aluno/Excluir/@Aluno.Id" class="btn btn-primary">Excluir</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

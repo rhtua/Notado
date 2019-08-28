@@ -1,0 +1,262 @@
+﻿
+@{
+    ViewBag.Title = "Adicionar";
+}
+
+@model Notado.ViewModels.AlunoViewModel
+
+
+<!-------------------------------Aluno-------------------------------------->
+<form action="/Aluno/Adicionar" method="post">
+    <div class="text-center">
+        <h1 class=" text-gray-900">Cadastro Aluno</h1>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="Nome">Nome <h11>*</h11></label>
+            <input id="Nome" name="AlunoViewModel.nome" placeholder="" class="form-control" required="" type="text">
+        </div>
+        <div class="col">
+            <label for="email">Email <h11>*</h11></label>
+            <input id="email" name="AlunoViewModel.email" class="form-control" placeholder="email@email.com" required="" type="email">
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="cpf">CPF</label>
+            <input id="cpf" name="AlunoViewModel.cpf" placeholder="Apenas números" class="form-control" required="" maxlength="11" pattern="[0-9]+$">
+        </div>
+        <div class="col">
+            <label for="Nome">Nascimento <h11>*</h11></label>
+            <input id="dtnasc" name="AlunoViewModel.dtnasc" placeholder="DD/MM/AAAA" class="form-control" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+        </div>
+        <div class="col">
+            <label for="telefone">Telefone <h11>*</h11></label>
+            <input id="telefone" name="AlunoViewModel.telefone" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+                   OnKeyPress="formatar('## #####-####', this)">
+        </div>
+        <div class="col">
+            <label for="turma">Turma</label>
+            <select name="AlunoViewModel.TurmaId" class="form-control">
+                @foreach (var turma in ViewBag.Turmas)
+                {
+                    <option value="@turma.Id">@turma.Ensino - @turma.Ano ano @turma.Divisor</option>
+                }
+            </select>
+        </div>
+    </div>
+    <!------------------------------Responsável 1-------------------------------------->
+    <div class="text-center">
+        <h1 class=" text-gray-900">Responsável 1</h1>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="nomeResp">Nome <h11>*</h11></label>
+            <input id="nomeResp" name="AlunoViewModel.nome_responsavel_1" placeholder="" class="form-control" required="" type="text">
+        </div>
+        <div class="col">
+            <label for="emailResp">Email <h11>*</h11></label>
+            <input id="emailResp" name="AlunoViewModel.email_responsavel_1" class="form-control" placeholder="email@email.com" required="" type="email">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="vinculo">Vinculo <h11>*</h11></label>
+            <input id="vinculo" name="AlunoViewModel.vinculo" placeholder="" class="form-control" required="" type="text">
+        </div>
+        <div class="col">
+            <label for="dtnascResp">Nascimento<h11>*</h11></label>
+            <input id="dtnascResp" name="AlunoViewModel.dtnasc_responsavel_1" placeholder="DD/MM/AAAA" class="form-control" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)">
+        </div>
+        <div class="col">
+            <label for="estadoCivil">Estado Civil <h11>*</h11></label>
+            <select required id="estadoCivil" name="AlunoViewModel.estadoCivil_responsavel_1" class="form-control">
+                <option value=""></option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viuvo(a)">Viuvo(a)</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="cpfResp">CPF</label>
+            <input id="cpfResp" name="AlunoViewModel.cpf_responsavel_1" placeholder="Apenas números" class="form-control" required="" type="text" maxlength="11" pattern="[0-9]+$">
+        </div>
+        <div class="col">
+            <label for="rg">RG</label>
+            <input id="rg" name="AlunoViewModel.rg_responsavel_1" placeholder="Apenas números" class="form-control" required="" type="text" maxlength="11">
+        </div>
+        <div class="col">
+
+            <label for="selectbasic">Escolaridade <h11>*</h11></label>
+            <select required id="escolaridade" name="AlunoViewModel.escolaridade_responsavel_1" class="form-control">
+                <option value=""></option>
+                <option value="Analfabeto">Analfabeto</option>
+                <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                <option value="Fundamental Completo">Fundamental Completo</option>
+                <option value="Médio Incompleto">Médio Incompleto</option>
+                <option value="Médio Completo">Médio Completo</option>
+                <option value="Superior Incompleto">Superior Incompleto</option>
+                <option value="Superior Completo">Superior Completo</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="telefoneResp">Telefone <h11>*</h11></label>
+            <input id="telefoneResp" name="AlunoViewModel.telefone_responsavel_1" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+                   OnKeyPress="formatar('## #####-####', this)">
+        </div>
+        <div class="col">
+            <label for="telefone2Resp">Telefone Alternativo<h11>*</h11></label>
+            <input id="telefone2Resp" name="AlunoViewModel.telefone2_responsavel_1" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+                   OnKeyPress="formatar('## #####-####', this)">
+        </div>
+        <div class="col">
+            <label for="profissao">Profissão<h11>*</h11></label>
+            <input id="profissao" name="AlunoViewModel.profissao_responsavel_1" type="text" placeholder="" class="form-control input-md" required="">
+        </div>
+
+    </div>
+
+    <!------------------------------Responsável 2-------------------------------------->
+    <div class="text-center">
+        <h1 class=" text-gray-900">Responsável 2</h1>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="nomeResp">Nome <h11>*</h11></label>
+            <input id="nomeResp" name="AlunoViewModel.nome_responsavel_2" placeholder="" class="form-control" required="" type="text">
+        </div>
+        <div class="col">
+            <label for="emailResp">Email <h11>*</h11></label>
+            <input id="emailResp" name="AlunoViewModel.email_responsavel_2" class="form-control" placeholder="email@email.com" required="" type="email">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col">
+            <label for="    lo">Vinculo <h11>*</h11></label>
+            <input id="vinculo" name="AlunoViewModel.vinculo2" placeholder="" class="form-control" required="" type="text">
+        </div>
+        <div class="col">
+            <label for="dtnascResp">Nascimento<h11>*</h11></label>
+            <input id="dtnascResp" name="AlunoViewModel.dtnasc_responsavel_2" placeholder="DD/MM/AAAA" class="form-control" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)">
+        </div>
+        <div class="col">
+            <label for="estadoCivil">Estado Civil <h11>*</h11></label>
+            <select required id="estadoCivil" name="AlunoViewModel.estadoCivil_responsavel_2" class="form-control">
+                <option value=""></option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viuvo(a)">Viuvo(a)</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="cpfResp">CPF</label>
+            <input id="cpfResp" name="AlunoViewModel.cpf_responsavel_2" placeholder="Apenas números" class="form-control" required="" type="text" maxlength="11" pattern="[0-9]+$">
+        </div>
+        <div class="col">
+            <label for="rg">RG</label>
+            <input id="rg" name="AlunoViewModel.rg_responsavel_2" placeholder="Apenas números" class="form-control" required="" type="text" maxlength="11">
+        </div>
+        <div class="col">
+
+            <label for="selectbasic">Escolaridade <h11>*</h11></label>
+            <select required id="escolaridade" name="AlunoViewModel.escolaridade_responsavel_2" class="form-control">
+                <option value=""></option>
+                <option value="Analfabeto">Analfabeto</option>
+                <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                <option value="Fundamental Completo">Fundamental Completo</option>
+                <option value="Médio Incompleto">Médio Incompleto</option>
+                <option value="Médio Completo">Médio Completo</option>
+                <option value="Superior Incompleto">Superior Incompleto</option>
+                <option value="Superior Completo">Superior Completo</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="telefoneResp">Telefone <h11>*</h11></label>
+            <input id="telefoneResp" name="AlunoViewModel.telefone_responsavel_2" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+                   OnKeyPress="formatar('## #####-####', this)">
+        </div>
+        <div class="col">
+            <label for="telefone2Resp">Telefone Alternativo<h11>*</h11></label>
+            <input id="telefone2Resp" name="AlunoViewModel.telefone2_responsavel_2" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+                   OnKeyPress="formatar('## #####-####', this)">
+        </div>
+        <div class="col">
+            <label for="profissao">Profissão<h11>*</h11></label>
+            <input id="profissao" name="AlunoViewModel.profissao_responsavel_2" type="text" placeholder="" class="form-control input-md" required="">
+        </div>
+
+    </div>
+
+    <!--------------------------------Endereço-------------------------------------------------------->
+    <div class="text-center">
+        <h1 class=" text-gray-900">Endereço</h1>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label for="cep">CEP <h11>*</h11></label>
+            <input id="cep" name="AlunoViewModel.cep" placeholder="Apenas números" class="form-control" required="" value="" type="search" maxlength="8" pattern="[0-9]+$">
+        </div>
+        <div class="col-md-2">
+            <label for="button" style="opacity:0;">Pesquisar</label><br />
+            <button id="button" type="button" class="btn btn-primary button" onclick="pesquisacep(cep.value)">Pesquisar</button>
+        </div>
+
+        <div class="col">
+            <label for="rua">Rua</label>
+            <input id="rua" name="AlunoViewModel.endereco" class="form-control" placeholder="" readonly="readonly" required="" type="text">
+
+        </div>
+        <div class="col">
+            <label for="numero">Nº <h11>*</h11></label>
+            <input id="numero" name="AlunoViewModel.rua" class="form-control" placeholder="" required="" type="text">
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+        <div class="col">
+            <label for="bairro">Bairro</label>
+            <input id="bairro" name="AlunoViewModel.bairro" class="form-control" placeholder="" required="" readonly="readonly" type="text">
+        </div>
+
+        <div class="col">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" name="AlunoViewModel.cidade" class="form-control" placeholder="" readonly="readonly" required="" type="text">
+        </div>
+
+
+        <div class="col">
+            <label for="estado">Estado</label>
+            <input id="estado" name="AlunoViewModel.estado" class="form-control" placeholder="" readonly="readonly" required="" type="text">
+
+        </div>
+    </div>
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <label class="col-md-2 control-label text-center" for="Cadastrar"></label>
+        <div class="col-md-8">
+            <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
+            <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+        </div>
+    </div>
+    <!--------------------------------Fechamento das div's do box-------------------------------------------------------->
+</form>
+
+<!--------------------------------Scripts de formatação e pesquisa-------------------------------------------------------->
+<script src="~/Scripts/form.js"></script>
+

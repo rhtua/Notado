@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Adicionar";
+}
+@model Notado.ViewModels.DisciplinaViewModel
+
+<form action="/Disciplina/Adicionar" method="post">
+    <div class="text-center">
+        <h1 class=" text-gray-900">Cadastro Disciplina</h1>
+    </div>
+    <div class="form-group row" style="margin-top: 2em;">
+        <div class="col">
+            <label for="nome">Disciplina</label>
+            <input id="nome" name="DisciplinaViewModel.Nome" placeholder="Português" class="form-control" />
+        </div>
+        <div class="col">
+            <label for="turma">Professor</label>
+            <select name="DisciplinaViewModel.ProfessorId" class="form-control">
+                @foreach (var professor in ViewBag.Professores)
+                {
+                    <option value="@professor.Id">@professor.nome - @professor.Disciplina</option>
+                }
+            </select>
+        </div>
+
+        <div class="col">
+            <label for="horas">Carga Horaria <h11>*</h11></label>
+            <input id="horas" name="DisciplinaViewModel.CargaHoraria" class="form-control" type="number" placeholder="80">
+
+        </div>
+
+        <div class="col">
+            <label for="turma">Turma</label>
+            <select name="DisciplinaViewModel.TurmaId" class="form-control">
+                @foreach (var turma in ViewBag.Turmas)
+                {
+                    <option value="@turma.Id">@turma.Ensino - @turma.Ano ano @turma.Divisor</option>
+                }
+            </select>
+        </div>
+
+        <div class="row">
+            <label class="col-md-2 control-label text-center" for="Cadastrar"></label>
+            <div class="col-md-8">
+                <label for="button" style="opacity:0;">Cadastrar</label><br />
+                <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+
+</form>

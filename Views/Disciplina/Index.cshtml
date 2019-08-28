@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@model Notado.ViewModels.DisciplinaViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Professor ID</th>
+            <th scope="col">Carga Horária</th>
+            <th scope="col">Turma ID</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Disciplina in ViewBag.Disciplinas)
+        {
+            <tr>
+                <th scope="row">@Disciplina.Id</th>
+                <td>@Disciplina.Nome</td>
+                <td>@Disciplina.ProfessorId</td>
+                <td>@Disciplina.CargaHoraria</td>
+                <td>@Disciplina.TurmaId</td>
+                <td><a href="/Disciplina/Editar/@Disciplina.Id" class="btn btn-primary">Editar</a></td>
+                <td><a href="/Disciplina/Excluir/@Disciplina.Id" class="btn btn-primary">Excluir</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
