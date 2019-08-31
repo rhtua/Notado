@@ -1,0 +1,32 @@
+﻿
+
+@model Notado.ViewModels.AlunoViewModel
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Adicionar</th>
+            <th scope="col">Ver Nota</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Aluno in ViewBag.Alunos)
+        {
+            <tr>
+                <th scope="row">@Aluno.Id</th>
+                <td>@Aluno.nome</td>
+                <td>@Aluno.cpf</td>
+
+                <td><a href="/Aluno/AdicionarNota/@Aluno.Id" class="btn btn-primary">Adicionar</a></td>
+                <td><a href="/Aluno/VerNota/@Aluno.Id" class="btn btn-primary">Ver notas</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

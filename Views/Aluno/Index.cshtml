@@ -6,7 +6,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Turma</th>
@@ -20,20 +19,41 @@
     <tbody>
         @foreach (var Aluno in ViewBag.Alunos)
         {
-            <tr>
-                <th scope="row">@Aluno.Id</th>
-                <td>@Aluno.nome</td>
-                <td>@Aluno.email</td>
-                <td>@Aluno.TurmaId</td>
-                <td>@Aluno.telefone</td>
-                <td>@Aluno.nome_responsavel_1</td>
-                <td>@Aluno.vinculo</td>
-                <td>@Aluno.telefone_responsavel_1 / @Aluno.telefone2_responsavel_1</td>
+        <tr class="busca">
+            <td class="info-nome">@Aluno.nome</td>
+            <td>@Aluno.email</td>
+            <td>@Aluno.TurmaId</td>
+            <td>@Aluno.telefone</td>
+            <td>@Aluno.nome_responsavel_1</td>
+            <td>@Aluno.vinculo</td>
+            <td>@Aluno.telefone_responsavel_1 / @Aluno.telefone2_responsavel_1</td>
 
-                <td><a href="/Aluno/Editar/@Aluno.Id" class="btn btn-primary">Editar</a></td>
-                <td><a href="/Aluno/Excluir/@Aluno.Id" class="btn btn-primary">Excluir</a></td>
+            <td><a href="/Aluno/Editar/@Aluno.Id" class="btn btn-primary">Editar</a></td>
+            <td><a htype="button" class="btn btn-primary" style="color:white;" data-toggle="modal" data-target="#myModal">Excluir</a></td>
 
-            </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content justify-content-center">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>O item será excluído permanentemente. Deseja continuar?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/Professor/Excluir/@Aluno.Id" class="btn btn-primary">Excluir</a>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </tr>
         }
     </tbody>
 </table>

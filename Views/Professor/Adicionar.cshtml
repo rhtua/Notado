@@ -25,7 +25,8 @@
     <div class="form-group row">
         <div class="col">
             <label for="cpf">CPF</label>
-            <input id="cpf" name="ProfessorViewModel.cpf" placeholder="Apenas números" class="form-control" required="" maxlength="11" pattern="[0-9]+$">
+            @*<input type="text" name="ProfessorViewModel.cpf" onBlur="ValidarCPF(this.);" onKeyPress="MascaraCPF(this);" maxlength="14">*@
+            <input id="cpf" name="ProfessorViewModel.cpf" onBlur="ValidarCPF(this);" onKeyPress="MascaraCPF(this);" maxlength="14" placeholder="Apenas números" class="form-control" required="">
         </div>
         <div class="col">
             <label for="Nome">Nascimento <h11>*</h11></label>
@@ -44,7 +45,7 @@
         </div>
         <div class="col">
             <label for="disciplina">Disciplina <h11>*</h11></label>
-            <input id="disciplina" name="ProfessorViewModel.Disciplina" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text">
+            <input id="disciplina" name="ProfessorViewModel.Disciplina" class="form-control" placeholder="Portugês" required="" type="text">
         </div>
     </div>
 
@@ -103,3 +104,4 @@
 </form>
 
 <script src="~/Scripts/form.js"></script>
+<script src="~/Scripts/validaCPF.js"></script>

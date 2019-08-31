@@ -1,4 +1,5 @@
-﻿using Notado.ViewModels;
+﻿using Notado.Enuns;
+using Notado.ViewModels;
 
 namespace Notado.ViewModels
 {
@@ -10,7 +11,8 @@ namespace Notado.ViewModels
 
         public string Senha { get; set; }
 
-        public int tipo { get; set; }
+        public Autorizacao Autorizacao { get; set; }
+
 
     }
 

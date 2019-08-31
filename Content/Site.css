@@ -178,4 +178,8 @@ Notify
         opacity: 0.0;
     }
 }
+
+.some {
+    display: none;
+}
     

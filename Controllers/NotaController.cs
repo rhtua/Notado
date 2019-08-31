@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Notado.DAO;
+using Notado.Enuns;
+using Notado.Filtros;
 using Notado.Models;
 using Notado.ViewModels;
 using System;
@@ -10,25 +12,37 @@ using System.Web.Mvc;
 
 namespace Notado.Controllers
 {
+    [AutorizacaoFilter(Roles = new Autorizacao[] { Autorizacao.adm, Autorizacao.professor })]
+
     public class NotaController : Controller
     {
         public ActionResult Index()
+        {
+            AlunosDAO dao = new AlunosDAO();
+            IList<Aluno> alunos = dao.Lista();
+            ViewBag.Alunos = alunos;
+            return View();
+        }
+        [HttpGet]
+
+        public ActionResult Adicionar(int id)
         {
             TurmasDAO Tdao = new TurmasDAO();
             IList<Turma> turma = Tdao.Lista();
             ViewBag.Turmas = turma;
 
             DisciplinasDAO dao = new DisciplinasDAO();
-            IList<Disciplina> Disciplina = dao.Lista();
-            ViewBag.Disciplinas = Disciplina;
+            IList<Disciplina> disciplina = dao.Lista();
+            ViewBag.Disciplinas = disciplina;
 
-            AlunosDAO Adao = new AlunosDAO();
-            IList<Aluno> alunos = Adao.Lista();
-            ViewBag.Alunos = alunos;
-
+            var ndao = new NotasDAO();
+            Aluno aluno = ndao.BuscaPorId(id);
+            ViewBag.Aluno = aluno;
             return View();
         }
 
+
+        [HttpPost]
         public ActionResult Adicionar(NotaViewModel nota)
         {
             var Prova = new ProvaViewModel

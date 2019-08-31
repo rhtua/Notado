@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Notado.DAO;
+using Notado.Enuns;
+using Notado.Filtros;
 using Notado.Models;
 using Notado.ViewModels;
 using System;
@@ -10,6 +12,8 @@ using System.Web.Mvc;
 
 namespace Notado.Controllers
 {
+    [AutorizacaoFilter(Roles = new Autorizacao[] { Autorizacao.adm })]
+
     public class ProfessorController : Controller
     {
         public ActionResult Adicionar()

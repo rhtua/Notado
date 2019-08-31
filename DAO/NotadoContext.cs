@@ -21,6 +21,7 @@ namespace Notado.DAO
         public DbSet<Avaliacao> Avaliacoes { get; set; }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Nota> Nota { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

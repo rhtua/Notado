@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Notado.Models
+@using System.Linq
+@using Microsoft.EntityFrameworkCore
+@using Notado.Enuns
+@{var nome = (Session["usuarioLogado"] as Usuario).Nome;}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -15,7 +21,7 @@
     <link rel="stylesheet" href="~/LoginFonts/css/style.css">
     <link rel="stylesheet" href="~/Content/Site.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="~/LoginFonts/images/favicon.png" />
+    <link rel="shortcut icon" href="~/LoginFonts/images/book.ico" />
 </head>
 
 
@@ -40,7 +46,7 @@
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+                            <input type="text" name="filtro" id="filtro" class="form-control bg-transparent border-0" placeholder="Busque por nome...">
                         </div>
                     </form>
                 </div>
@@ -52,12 +58,12 @@
                                 <span class="availability-status online"></span>
                             </div>
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">David Greymaax</p>
+                                <p class="mb-1 text-black">@nome</p>
                             </div>
                         </a>
                     </li>
                     <li class="nav-item nav-logout d-none d-lg-block">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="~/Login/Logout">
                             <i class="mdi mdi-power"></i>
                         </a>
                     </li>
@@ -82,74 +88,127 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="~/Home">
                             <span class="menu-title">Dashboard</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-title">Cadastro</span>
-                            <i class="menu-arrow"></i>
-                            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="~/Aluno/Adicionar">Cadastrar Aluno</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="~/Professor/Adicionar">Cadastrar Professor</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="~/Turma/Adicionar">Cadastrar Turma</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="~/Disciplina/Adicionar">Cadastrar Disciplina</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-title">Listar</span>
-                            <i class="menu-arrow"></i>
-                            <i class="mdi mdi-folder-account menu-icon"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="~/Aluno/Index">Ver Alunos</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="~/Professor/Index">Ver Professores</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="~/Turma/Index">Ver Turmas</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="~/Disciplina/Index">Ver Disciplinas</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
-                            <span class="menu-title">Icons</span>
-                            <i class="mdi mdi-contacts menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/forms/basic_elements.html">
-                            <span class="menu-title">Forms</span>
-                            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/charts/chartjs.html">
-                            <span class="menu-title">Charts</span>
-                            <i class="mdi mdi-chart-bar menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/tables/basic-table.html">
-                            <span class="menu-title">Tables</span>
-                            <i class="mdi mdi-table-large menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item sidebar-actions">
-                        <div class="mt-4">
-                            <ul class="gradient-bullet-list mt-4">
-                                <li>Free</li>
-                                <li>Pro</li>
-                            </ul>
-                        </div>
-                    </li>
+                    @if (Session.Keys.Cast<String>().Any(c => c == "usuarioLogado"))
+                    {
+                        if ((Session["usuarioLogado"] as Usuario).Autorizacao == Autorizacao.adm)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <span class="menu-title">Cadastro</span>
+                                    <i class="menu-arrow"></i>
+                                    <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="~/Aluno/Adicionar">Cadastrar Aluno</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Professor/Adicionar">Cadastrar Professor</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Turma/Adicionar">Cadastrar Turma</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Disciplina/Adicionar">Cadastrar Disciplina</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                    }
+
+                    @if (Session.Keys.Cast<String>().Any(c => c == "usuarioLogado"))
+                    {
+                        if ((Session["usuarioLogado"] as Usuario).Autorizacao == Autorizacao.adm)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <span class="menu-title">Listar</span>
+                                    <i class="menu-arrow"></i>
+                                    <i class="mdi mdi-folder-account menu-icon"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="~/Aluno/Index">Ver Alunos</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Professor/Index">Ver Professores</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Turma/Index">Ver Turmas</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Disciplina/Index">Ver Disciplinas</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+
+                        if ((Session["usuarioLogado"] as Usuario).Autorizacao == Autorizacao.professor)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <span class="menu-title">Listar</span>
+                                    <i class="menu-arrow"></i>
+                                    <i class="mdi mdi-folder-account menu-icon"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="~/Aluno/Index">Ver Alunos</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Professor/Index">Ver Professores</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Turma/Index">Ver Turmas</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="~/Disciplina/Index">Ver Disciplinas</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+
+                    }
+
+                    @if (Session.Keys.Cast<String>().Any(c => c == "usuarioLogado"))
+                    {
+                        if ((Session["usuarioLogado"] as Usuario).Autorizacao == Autorizacao.adm)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Aluno/IndexNota">
+                                    <span class="menu-title">Notas</span>
+                                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                                </a>
+                            </li>
+                        }
+
+                        if ((Session["usuarioLogado"] as Usuario).Autorizacao == Autorizacao.professor)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Aluno/IndexNota">
+                                    <span class="menu-title">Notas</span>
+                                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                                </a>
+                            </li>
+                        }
+
+                    }
+
+
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="pages/forms/basic_elements.html">
+                                <span class="menu-title">Forms</span>
+                                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/charts/chartjs.html">
+                                <span class="menu-title">Charts</span>
+                                <i class="mdi mdi-chart-bar menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/tables/basic-table.html">
+                                <span class="menu-title">Tables</span>
+                                <i class="mdi mdi-table-large menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item sidebar-actions">
+                            <div class="mt-4">
+                                <ul class="gradient-bullet-list mt-4">
+                                    <li>Free</li>
+                                    <li>Pro</li>
+                                </ul>
+                            </div>
+                        </li>*@
                 </ul>
             </nav>
             <!-- partial -->
@@ -162,7 +221,7 @@
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © @DateTime.Now.Year <a href="https://www.linkedin.com/in/rhtua/" target="_blank">Arthur Oliveira</a>. Todos os direitos reservados.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Um trabalho em conjun                                                                                                                                              to <i class="mdi mdi-heart text-danger"></i></span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Um trabalho em conjunto <i class="mdi mdi-heart text-danger"></i></span>
                     </div>
                 </footer>
                 <!-- partial -->
@@ -185,6 +244,7 @@
     <!-- Custom js for this page-->
     <script src="~/LoginFonts/js/dashboard.js"></script>
     <script src="~/LoginFonts/js/custom.js"></script>
+    <script src="~/Scripts/filtro.js"></script>
 
     <!-- End custom js for this page-->
 </body>

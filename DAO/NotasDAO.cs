@@ -42,11 +42,11 @@ namespace Notado.DAO
                 return contexto.Alunos.Where(m => m.TurmaId == turmaId).ToList();
             }
         }
-        public Disciplina BuscaPorId(int id)
+        public Aluno BuscaPorId(int id)
         {
             using (var contexto = new NotadoContext())
             {
-                return contexto.Disciplinas.Where(t => t.Id == id).FirstOrDefault();
+                return contexto.Alunos.Where(t => t.Id == id).FirstOrDefault();
             }
         }
 
@@ -69,6 +69,30 @@ namespace Notado.DAO
                 contexto.SaveChanges();
             }
 
+        }
+
+        public Prova BuscaPorProva(int id)
+        {
+            using (var contexto = new NotadoContext())
+            {
+                return contexto.Provas.Where(t => t.AlunoId == id).FirstOrDefault();
+            }
+        }
+
+        public Recuperacao BuscaPorRecuperacao(int id)
+        {
+            using (var contexto = new NotadoContext())
+            {
+                return contexto.Recuperacoes.Where(t => t.AlunoId == id).FirstOrDefault();
+            }
+        }
+
+        public Trabalho BuscaPorTrabalho(int id)
+        {
+            using (var contexto = new NotadoContext())
+            {
+                return contexto.Trabalhos.Where(t => t.AlunoId == id).FirstOrDefault();
+            }
         }
     }
 }

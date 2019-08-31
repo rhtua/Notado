@@ -1,4 +1,6 @@
 ﻿
+using Notado.Enuns;
+
 namespace Notado.Models
 {
     public class Usuario
@@ -9,7 +11,8 @@ namespace Notado.Models
 
         public string Senha { get; set; }
 
-        public int tipo { get; set; }
+        public Autorizacao Autorizacao { get; set; }
+
 
 
     }

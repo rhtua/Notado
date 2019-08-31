@@ -26,7 +26,7 @@
     <div class="form-group row">
         <div class="col">
             <label for="cpf">CPF</label>
-            <input id="cpf" name="AlunoViewModel.cpf" placeholder="Apenas números" class="form-control" required="" maxlength="11" pattern="[0-9]+$">
+            <input id="cpf" name="AlunoViewModel.cpf" placeholder="Apenas números" class="form-control" required="" onBlur="ValidarCPF(this);" onKeyPress="MascaraCPF(this);" maxlength="14">
         </div>
         <div class="col">
             <label for="Nome">Nascimento <h11>*</h11></label>
@@ -259,4 +259,5 @@
 
 <!--------------------------------Scripts de formatação e pesquisa-------------------------------------------------------->
 <script src="~/Scripts/form.js"></script>
+<script src="~/Scripts/validaCPF.js"></script>
 
