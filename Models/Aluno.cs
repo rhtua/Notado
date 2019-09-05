@@ -52,8 +52,6 @@ namespace Notado.Models
 
         public string cpf_responsavel_2 { get; set; }
 
-        public int ano { get; set; }
-
         public virtual IEnumerable<Avaliacao> Avaliacoes { get; set; }
 
         public int TurmaId { get; set; }

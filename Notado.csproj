@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\TurmaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AlunosDAO.cs" />
     <Compile Include="DAO\DisciplinasDAO.cs" />
     <Compile Include="DAO\NotadoContext.cs" />
@@ -228,6 +229,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190904024630_InitialMigration_home.cs" />
+    <Compile Include="Migrations\20190904024630_InitialMigration_home.designer.cs">
+      <DependentUpon>20190904024630_InitialMigration_home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\NotadoContextModelSnapshot.cs" />
     <Compile Include="Models\Adm.cs" />
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\Disciplina.cs" />
@@ -2338,13 +2344,18 @@
     <Content Include="Views\Disciplina\Adicionar.cshtml" />
     <Content Include="Views\Disciplina\Editar.cshtml" />
     <Content Include="Views\Disciplina\Index.cshtml" />
-    <Content Include="Views\Aluno\IndexNota.cshtml" />
+    <Content Include="Views\Nota\Index.cshtml" />
     <Content Include="Views\Turma\Editar.cshtml" />
     <Content Include="Views\Turma\Index.cshtml" />
     <Content Include="Views\Professor\Editar.cshtml" />
     <Content Include="Views\Professor\Index.cshtml" />
-    <Content Include="Views\Aluno\AdicionarNota.cshtml" />
-    <Content Include="Views\Aluno\VerNota.cshtml" />
+    <Content Include="Views\Nota\Adicionar.cshtml" />
+    <Content Include="Views\Nota\VerNota.cshtml" />
+    <Content Include="Views\Nota\Vazio.cshtml" />
+    <Content Include="Views\Aluno\Usuario.cshtml" />
+    <Content Include="Views\Usuario\Adicionar.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Nota\Busca.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

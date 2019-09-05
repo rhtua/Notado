@@ -16,10 +16,11 @@ namespace Notado.Controllers
 
     public class NotaController : Controller
     {
-        public ActionResult Index()
+
+        public ActionResult Index(int id)
         {
             AlunosDAO dao = new AlunosDAO();
-            IList<Aluno> alunos = dao.Lista();
+            IList<Aluno> alunos = dao.BuscaPorTurma(id);
             ViewBag.Alunos = alunos;
             return View();
         }
@@ -27,10 +28,6 @@ namespace Notado.Controllers
 
         public ActionResult Adicionar(int id)
         {
-            TurmasDAO Tdao = new TurmasDAO();
-            IList<Turma> turma = Tdao.Lista();
-            ViewBag.Turmas = turma;
-
             DisciplinasDAO dao = new DisciplinasDAO();
             IList<Disciplina> disciplina = dao.Lista();
             ViewBag.Disciplinas = disciplina;
@@ -47,7 +44,7 @@ namespace Notado.Controllers
         {
             var Prova = new ProvaViewModel
             {
-                AlunoId = nota.AlunoId,
+                AlunoId = nota.Id,
                 Nota = nota.Prova,
                 DisciplinaID = nota.DisciplinaId,
                 Bimestre = nota.Bimestre
@@ -59,7 +56,7 @@ namespace Notado.Controllers
 
             var Recuperacao = new RecuperacaoViewModel
             {
-                AlunoId = nota.AlunoId,
+                AlunoId = nota.Id,
                 Nota = nota.Recuperacao,
                 DisciplinaID = nota.DisciplinaId,
                 Bimestre = nota.Bimestre
@@ -71,7 +68,7 @@ namespace Notado.Controllers
 
             var Trabalho = new TrabalhoViewModel
             {
-                AlunoId = nota.AlunoId,
+                AlunoId = nota.Id,
                 Nota = nota.Trabalho,
                 DisciplinaID = nota.DisciplinaId,
                 Bimestre = nota.Bimestre
@@ -81,8 +78,61 @@ namespace Notado.Controllers
             var tr = new NotasDAO();
             tr.AdicionaTrabalho(trabalhoEntidade);
 
+            return RedirectToAction("Sucesso", "Redirect");
+        }
+
+        public ActionResult Vazio()
+        {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult VerNota(int id)
+        {
+
+            var pr = new NotasDAO();
+            Prova prova = pr.BuscaPorProva(id);
+
+            var rec = new NotasDAO();
+            Recuperacao recu = rec.BuscaPorRecuperacao(id);
+
+            var tr = new NotasDAO();
+            Trabalho trab = tr.BuscaPorTrabalho(id);
+
+            var ndao = new NotasDAO();
+            Aluno aluno = ndao.BuscaPorId(id);
+            ViewBag.Aluno = aluno;
+
+            if (trab != null && (prova != null || recu != null))
+            {
+                var Notas = new Nota();
+                Notas.Trabalho = trab.Nota;
+                Notas.Recuperacao = recu.Nota;
+                Notas.Prova = prova.Nota;
+                Notas.Bimestre = prova.Bimestre;
+                ViewBag.Notas = Notas;
+
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Vazio");
+
+            }
+
+        }
+
+        public ActionResult Busca()
+        {
+            TurmasDAO dao = new TurmasDAO();
+            IList<Turma> Turmas = dao.Lista();
+            ViewBag.Turmas = Turmas;
+            return View();
+
+        }
+
+
 
     }
 }

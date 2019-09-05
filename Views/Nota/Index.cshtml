@@ -1,0 +1,45 @@
+﻿
+@using Notado.Models
+@model Notado.ViewModels.AlunoViewModel
+
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Alunos nessa turma:</h1><br />
+
+            @if (((IList<Aluno>)ViewBag.Alunos).Count() == 0)
+            {
+                <h2 class="text-center">Não há alunos nessa turma :(</h2>
+                <a href="/Nota/Busca" class="btn btn-primary">Voltar</a>
+            }
+            else
+            {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Adicionar</th>
+                                <th scope="col">Ver Nota</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Aluno in ViewBag.Alunos)
+                            {
+                                <tr>
+                                    <th scope="row">@Aluno.Id</th>
+                                    <td>@Aluno.nome</td>
+                                    <td>@Aluno.email</td>
+
+                                    <td><a href="/Nota/Adicionar/@Aluno.Id" class="btn btn-primary">Adicionar</a></td>
+                                    <td><a href="/Nota/VerNota/@Aluno.Id" class="btn btn-primary">Ver notas</a></td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>

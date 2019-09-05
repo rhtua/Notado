@@ -38,7 +38,6 @@ namespace Notado.Controllers
             return RedirectToAction("Sucesso", "Redirect");
         }
 
-        [AutorizacaoFilter(Roles = new Autorizacao[] { Autorizacao.adm })]
         public ActionResult Index()
         {
             AlunosDAO dao = new AlunosDAO();
@@ -83,104 +82,13 @@ namespace Notado.Controllers
             return RedirectToAction("Sucesso", "Redirect");
 
         }
-        //---------------------------------------------------
-        //Notas
-
-        public ActionResult IndexNota()
+        public ActionResult Usuario()
         {
-            AlunosDAO dao = new AlunosDAO();
-            IList<Aluno> alunos = dao.Lista();
-            ViewBag.Alunos = alunos;
-            return View();
-        }
-        [HttpGet]
-
-        public ActionResult AdicionarNota(int id)
-        {
-            TurmasDAO Tdao = new TurmasDAO();
-            IList<Turma> turma = Tdao.Lista();
-            ViewBag.Turmas = turma;
-
-            DisciplinasDAO dao = new DisciplinasDAO();
-            IList<Disciplina> disciplina = dao.Lista();
-            ViewBag.Disciplinas = disciplina;
-
-            var ndao = new NotasDAO();
-            Aluno aluno = ndao.BuscaPorId(id);
-            ViewBag.Aluno = aluno;
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult AdicionarNota(NotaViewModel nota)
-        {
-            var Prova = new ProvaViewModel
-            {
-                AlunoId = nota.Id,
-                Nota = nota.Prova,
-                DisciplinaID = nota.DisciplinaId,
-                Bimestre = nota.Bimestre
-            };
-            var provaEntidade = Mapper.Map<ProvaViewModel, Prova>(Prova);
-
-            var pr = new NotasDAO();
-            pr.AdicionaProva(provaEntidade);
-
-            var Recuperacao = new RecuperacaoViewModel
-            {
-                AlunoId = nota.Id,
-                Nota = nota.Recuperacao,
-                DisciplinaID = nota.DisciplinaId,
-                Bimestre = nota.Bimestre
-            };
-            var recuperacaoEntidade = Mapper.Map<RecuperacaoViewModel, Recuperacao>(Recuperacao);
-
-            var rc = new NotasDAO();
-            rc.AdicionaRecuperacao(recuperacaoEntidade);
-
-            var Trabalho = new TrabalhoViewModel
-            {
-                AlunoId = nota.Id,
-                Nota = nota.Trabalho,
-                DisciplinaID = nota.DisciplinaId,
-                Bimestre = nota.Bimestre
-            };
-            var trabalhoEntidade = Mapper.Map<TrabalhoViewModel, Trabalho>(Trabalho);
-
-            var tr = new NotasDAO();
-            tr.AdicionaTrabalho(trabalhoEntidade);
-
-            return RedirectToAction("Sucesso", "Redirect");
-        }
-
-        [HttpGet]
-        public ActionResult VerNota(int id)
-        {
-            
-            var pr = new NotasDAO();
-            Prova prova = pr.BuscaPorProva(id);
-
-            var rec = new NotasDAO();
-            Recuperacao recu = rec.BuscaPorRecuperacao(id);
-
-            var tr = new NotasDAO();
-            Prova trab = tr.BuscaPorProva(id);
-
-            var ndao = new NotasDAO();
-            Aluno aluno = ndao.BuscaPorId(id);
-            ViewBag.Aluno = aluno;
-
-            var Notas = new Nota();
-            Notas.Trabalho = trab.Nota;
-            Notas.Recuperacao = recu.Nota;
-            Notas.Prova = prova.Nota;
-            Notas.Bimestre = prova.Bimestre;
-            ViewBag.Notas = Notas;
 
             return View();
 
         }
+       
 
 
 

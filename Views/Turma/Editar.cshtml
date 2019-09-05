@@ -10,52 +10,53 @@
 }
 
 <form action="/Turma/Editar/@Turma.Id" method="post">
-    <div class="text-center">
-        <h1 class=" text-gray-900">Cadastro Turma</h1>
-    </div>
-    
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Atualiza Turma</h1><br />
 
-    <div class="form-group row">
-        <div class="col col-md-2">
-            <label for="Id">ID</label>
-            <input id="Id" name="TurmaViewModel.Id" class="form-control" placeholder="" value="@Turma.Id" readonly="readonly" required=""/>
 
-        </div>
+            <div class="form-group row">
+                <div class="col col-md-2">
+                    <label for="Id">ID</label>
+                    <input id="Id" name="TurmaViewModel.Id" class="form-control" placeholder="" value="@Turma.Id" readonly="readonly" required="" />
 
-        <div class="col">
-            <label for="Ensino">@Turma.Ensino<h11>*</h11></label>
-            <select required id="Ensino" name="TurmaViewModel.Ensino" class="form-control">
-                <option ></option>
-                <option  value="Fundamental">Fundamental</option>
-                <option  value="Medio">Médio</option>
+                </div>
 
-            </select>
-        </div>
-        <div class="col">   
-            <label for="ano">Ano <h11>*</h11></label>
-            <input id="ano" name="TurmaViewModel.Ano" class="form-control" placeholder="1" value="@Turma.Ano" required="" type="number">
-        </div>
-        <div class="col">
-            <label for="Divisor">Divisor <h11>*</h11></label>
-            <select required id="Divisor" name="TurmaViewModel.Divisor" class="form-control">
-                <option  value=""></option>
-                <option  value="A">A</option>
-                <option  value="B">B</option>
-                <option  value="C">C</option>
-                <option  value="D">D</option>
-                <option  value="E">E</option>
-                <option  value="F">F</option>
+                <div class="col">
+                    <label for="Ensino">@Turma.Ensino<h11>*</h11></label>
+                    <select required id="Ensino" name="TurmaViewModel.Ensino" class="form-control">
+                        <option></option>
+                        <option value="Fundamental">Fundamental</option>
+                        <option value="Medio">Médio</option>
 
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-md-2 control-label text-center" for="Cadastrar"></label>
-            <div class="col-md-8">
-                <label for="button" style="opacity:0;">Cadastrar</label><br />
-                <input id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit" value="Cadastrar"/>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="ano">Ano <h11>*</h11></label>
+                    <input id="ano" name="TurmaViewModel.Ano" class="form-control" placeholder="1" value="@Turma.Ano" required="" type="number">
+                </div>
+                <div class="col">
+                    <label for="Divisor">Divisor <h11>*</h11></label>
+                    <select required id="Divisor" name="TurmaViewModel.Divisor" class="form-control">
+                        <option value=""></option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 control-label text-center" for="Cadastrar"></label>
+                    <div class="col-md-8">
+                        <label for="button" style="opacity:0;">Cadastrar</label><br />
+                        <input id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit" value="Cadastrar" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </form>
 

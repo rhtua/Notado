@@ -1,0 +1,67 @@
+﻿@model Notado.ViewModels.NotaViewModel
+@{
+
+    var aluno = ViewBag.aluno;
+}
+
+@using (Html.BeginForm("Adicionar", "Nota", FormMethod.Post))
+{
+
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Menu de Notas</h1><br />
+            <div class="row">
+                <div class="col">
+                    <label for="disciplina">Disciplina</label>
+                    <select name="DisciplinaId" class="form-control">
+                        @foreach (var disciplina in ViewBag.Disciplinas)
+                        {
+                            <option value="@disciplina.Id">@disciplina.Nome</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="bimestre">Bimestre</label>
+                    <select id="bimestre" name="Bimestre" required="" class="form-control">
+                        <option value=""></option>
+                        <option value="1">1 Bimestre</option>
+                        <option value="2">2 Bimestre</option>
+                        <option value="3">3 Bimestre</option>
+                        <option value="4">4 Bimestre</option>
+
+                    </select>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Prova</th>
+                        <th scope="col">Recuperação</th>
+                        <th scope="col">Trabalho</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">@aluno.Id</th>
+                        <td>@aluno.nome</td>
+                        <td>@aluno.email</td>
+                        <td> <input id="Nome" name="Prova" placeholder="10,0" required="" class="form-control" type="number" min="0" max="100"> </td>
+                        <td> <input id="Nome" name="Recuperacao" placeholder="10,0" required="" class="form-control" type="number" min="0" max="100" /> </td>
+                        <td> <input id="Nome" name="Trabalho" placeholder="10,0" required="" class="form-control" type="number" min="0" max="100" /> </td>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-success">Adicionar</button>
+            <a href="/Nota/Index/@aluno.TurmaId" class="btn btn-danger">Voltar</a>
+        </div>
+    </div>
+}

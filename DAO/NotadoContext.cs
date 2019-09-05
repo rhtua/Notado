@@ -45,7 +45,7 @@ namespace Notado.DAO
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = Notado; Trusted_Connection = true; ");
+            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = NTDO; Trusted_Connection = true; ");
         }
     }
 

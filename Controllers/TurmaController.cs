@@ -12,7 +12,8 @@ using System.Web.Mvc;
 
 namespace Notado.Controllers
 {
-    [AutorizacaoFilter(Roles = new Autorizacao[] { Autorizacao.adm })]
+
+    [AutorizacaoFilter(Roles = new Autorizacao[] { Autorizacao.adm, Autorizacao.professor })]
 
     public class TurmaController : Controller
     {

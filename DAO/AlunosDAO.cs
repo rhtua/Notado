@@ -53,5 +53,14 @@ namespace Notado.DAO
             }
 
         }
+
+        public IList<Aluno> BuscaPorTurma(int id)
+        {
+            using (var contexto = new NotadoContext())
+            {
+                return contexto.Alunos.Where(t => t.TurmaId == id).ToList();
+            }
+        }
+
     }
 }

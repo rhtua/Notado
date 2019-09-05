@@ -43,6 +43,25 @@ namespace Notado.DAO
             }
         }
 
+        public void Excluir(Usuario usuarioRemover)
+        {
+            using (var contexto = new NotadoContext())
+            {
 
+                contexto.Remove(usuarioRemover);
+                contexto.SaveChanges();
+            }
+
+        }
+
+        public void Editar(Usuario usuario)
+        {
+            using (var contexto = new NotadoContext())
+            {
+                contexto.Usuarios.Update(usuario);
+                contexto.SaveChanges();
+            }
+
+        }
     }
 }

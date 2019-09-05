@@ -4,34 +4,28 @@
 }
 
 
-@model Notado.ViewModels.DisciplinaViewModel
+@model Notado.ViewModels.UsuarioViewModel
 
 <div class="card">
     <div class="card-body">
-        <h1 class="card-title">Vizualizar Disciplinas</h1><br />
+        <h1 class="card-title">Usuários</h1><br />
+        <a href="/Usuario/Adicionar" class="btn btn-success">Adicionar</a><br /><br />
+
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Professor ID</th>
-                    <th scope="col">Carga Horária</th>
-                    <th scope="col">Turma ID</th>
-                    <th scope="col">Editar</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Autorização</th>
                     <th scope="col">Excluir</th>
 
                 </tr>
             </thead>
             <tbody>
-                @foreach (var Disciplina in ViewBag.Disciplinas)
+                @foreach (var Usuario in ViewBag.Usuarios)
                 {
                     <tr class="busca">
-                        <th scope="row">@Disciplina.Id</th>
-                        <td class="info-nome">@Disciplina.Nome</td>
-                        <td>@Disciplina.ProfessorId</td>
-                        <td>@Disciplina.CargaHoraria</td>
-                        <td>@Disciplina.TurmaId</td>
-                        <td><a href="/Disciplina/Editar/@Disciplina.Id" class="btn btn-primary">Editar</a></td>
+                        <th scope="row">@Usuario.Nome</th>
+                        <td class="info-nome">@Usuario.Autorizacao</td>
                         <td><a htype="button" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#myModal">Excluir</a></td>
 
                         <!-- Modal -->
@@ -48,7 +42,7 @@
                                         <p>O item será excluído permanentemente. Deseja continuar?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="/Disciplina/Excluir/@Disciplina.Id" class="btn btn-danger">Excluir</a>
+                                        <a href="/Usuario/Excluir/@Usuario.Id" class="btn btn-danger">Excluir</a>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                     </div>
                                 </div>

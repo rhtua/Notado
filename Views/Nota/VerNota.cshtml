@@ -7,11 +7,11 @@
     var Notas = ViewBag.Notas;
 }
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Nome</th>
-            <th scope="col">CPF</th>
+            <th scope="col">Email</th>
             <th scope="col">Prova</th>
             <th scope="col">Recuperação</th>
             <th scope="col">Trabalho</th>
@@ -24,7 +24,7 @@
 
         <tr>
             <td>@aluno.nome</td>
-            <td>@aluno.cpf</td>
+            <td>@aluno.email</td>
             <td>@Notas.Prova</td>
             <td>@Notas.Recuperacao</td>
             <td>@Notas.Trabalho</td>
