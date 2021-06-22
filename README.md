@@ -1,6 +1,6 @@
 # NOTADO
 
-![GitHub repo size](https://img.shields.io/github/repo-size/rhtua/NOTADO?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/rhtua/Notado?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/rhtua/Notado?style=for-the-badge)
 
 
