@@ -14,4 +14,4 @@ Paralisei o projeto em 2019 e pretendo refatorá-lo com as novas tecnologias nas
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-[⬆ Voltar ao topo](# NOTADO)<br>
+[⬆ Voltar ao topo](#NOTADO)<br>
