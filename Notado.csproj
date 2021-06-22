@@ -296,6 +296,8 @@
     <Content Include="LoginFonts\images\faces-clipart\pic-2.png" />
     <Content Include="LoginFonts\images\faces-clipart\pic-3.png" />
     <Content Include="LoginFonts\images\faces-clipart\pic-4.png" />
+    <Content Include="LoginFonts\images\favicon.ico" />
+    <Content Include="LoginFonts\images\favicon.svg" />
     <Content Include="LoginFonts\images\icons\favicon.ico" />
     <Content Include="LoginFonts\images\book.ico" />
     <Content Include="LoginFonts\images\logo-mini.svg" />

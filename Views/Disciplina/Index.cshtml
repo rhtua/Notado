@@ -32,13 +32,11 @@
                         <td>@Disciplina.CargaHoraria</td>
                         <td>@Disciplina.TurmaId</td>
                         <td><a href="/Disciplina/Editar/@Disciplina.Id" class="btn btn-primary">Editar</a></td>
-                        <td><a htype="button" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#myModal">Excluir</a></td>
+                        <td><a href="/Disciplina/Excluir/@Disciplina.Id" class="btn btn-danger">Excluir</a></td>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
+                        @*<div class="modal fade" id="myModal" role="dialog">
                             <div class="modal-dialog">
-
-                                <!-- Modal content-->
                                 <div class="modal-content justify-content-center">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -54,7 +52,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div>*@
 
                     </tr>
                 }
